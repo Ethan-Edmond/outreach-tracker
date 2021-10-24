@@ -8,11 +8,16 @@ export const loginSlice = createSlice({
     },
     reducers: {
         setToken: (state, action) => {
-            state.token = action.payload;
+            return {
+                ...state,
+                token: action.payload
+            }
         },
         logout: (state) => {
-            state.token = null;
-            state.userId = null;
+            return {
+                token: null,
+                userId: null
+            }
         }
     }
 });
