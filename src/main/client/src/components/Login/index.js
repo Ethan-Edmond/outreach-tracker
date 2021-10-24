@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Input, InputLabel, InputAdornment, FormControl, IconButton, Stack, Button } from '@mui/material';
 import { Visibility, VisibilityOff } from "@mui/icons-material"
-import { setToken } from "../../store/loginReducer";
+import { login, register } from "../../store/loginReducer";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 
@@ -15,6 +15,7 @@ function Login() {
     const dispatch = useDispatch();
     const {push} = useHistory();
     const [passwordShowing, setPasswordShowing] = useState(false);
+    const [registering, setRegistering] = useState(true);
     const [formValues, setFormValues] = useState({
         username: '',
         password: ''
@@ -24,10 +25,13 @@ function Login() {
         setPasswordShowing(!passwordShowing);
     }
 
-    const login = async () => {
-        await dispatch(setToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjF9.8lSCknTnRANlJ0AVzCgO2yF838WYA7bLaAR7vAKnofo"));
-        console.log("TODO: USE AN ACTUAL TOKEN HERE AND PUT IT IN AN ACTION!");
-        push("/");
+    const toggleRegsitering = () => {
+        setRegistering(!registering);
+    }
+
+    const submit = () => {
+        const submitFn = registering ? register : login;
+        dispatch(submitFn(formValues, push));
     }
 
     const onFormChange = (evt) => {
@@ -36,7 +40,17 @@ function Login() {
 
     return (
         <Stack spacing={2} mt={1} alignItems="center">
-            Login
+            Please {registering ? "register" : "login" } to use outreach tracker
+            <LoginFormControl>
+                <Button
+                id="login-register-switch"
+                onClick={toggleRegsitering}
+                variant="contained"
+                color="secondary"
+                sx={{mt: "1rem"}}>
+                    {registering ? "I need to login" : "I need to register"}
+                </Button>
+            </LoginFormControl>
             <LoginFormControl>
                 <InputLabel htmlFor="login-username-input">Username</InputLabel>
                 <Input
@@ -67,8 +81,8 @@ function Login() {
                 <Button
                 sx={{mt: "1rem"}}
                 variant="contained"
-                onClick={login}>
-                    Submit
+                onClick={submit}>
+                    {registering ? "Register" : "Login"}
                 </Button>
             </LoginFormControl>
         </Stack>
