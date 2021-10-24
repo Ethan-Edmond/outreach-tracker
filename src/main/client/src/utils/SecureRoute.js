@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Route, useHistory } from "react-router-dom";
 import {decode} from "jsonwebtoken";
 

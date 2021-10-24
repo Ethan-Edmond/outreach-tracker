@@ -1,5 +1,4 @@
 import { Switch, Route } from 'react-router-dom';
-import logo from './logo.svg';
 import './App.css';
 import Nav from './components/Nav';
 import Home from './components/Home';
