@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Input, InputLabel, InputAdornment, FormControl, IconButton, Stack, Button } from '@mui/material';
 import { Visibility, VisibilityOff } from "@mui/icons-material"
+import { setToken } from "../../store/loginReducer";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 
 const LoginFormControl = (props) => {
     return (
@@ -9,6 +12,8 @@ const LoginFormControl = (props) => {
 }
 
 function Login() {
+    const dispatch = useDispatch();
+    const {push} = useHistory();
     const [passwordShowing, setPasswordShowing] = useState(false);
     const [formValues, setFormValues] = useState({
         username: '',
@@ -19,8 +24,10 @@ function Login() {
         setPasswordShowing(!passwordShowing);
     }
 
-    const login = () => {
-        console.log(formValues)
+    const login = async () => {
+        await dispatch(setToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjF9.8lSCknTnRANlJ0AVzCgO2yF838WYA7bLaAR7vAKnofo"));
+        console.log("TODO: USE AN ACTUAL TOKEN HERE AND PUT IT IN AN ACTION!");
+        push("/");
     }
 
     const onFormChange = (evt) => {

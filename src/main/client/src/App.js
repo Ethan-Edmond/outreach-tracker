@@ -1,30 +1,23 @@
-import { useSelector, useDispatch } from 'react-redux';
-
-import { setToken } from './store/loginReducer';
+import { Switch, Route } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
+import Nav from './components/Nav';
+import Home from './components/Home';
+import Error404 from './components/Error404';
 
 function App() {
-  const token = useSelector((state) => state.login.token);
-  const dispatch = useDispatch();
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Nav/>
+      <Switch>
+        <Route exact path="/">
+          <Home/>
+        </Route>
+        <Route path="/">
+          <Error404/>
+        </Route>
+      </Switch>
+    </>
   );
 }
 
