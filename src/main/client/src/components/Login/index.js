@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { Input, InputLabel, InputAdornment, FormControl, IconButton, Stack, Button } from '@mui/material';
 import { Visibility, VisibilityOff } from "@mui/icons-material"
 
-import './Login.css'
-
 const LoginFormControl = (props) => {
     return (
         <FormControl sx={{width: '15rem'}} {...props}/>
