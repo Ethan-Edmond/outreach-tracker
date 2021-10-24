@@ -1,7 +1,13 @@
+import { useSelector, useDispatch } from 'react-redux';
+
+import { setToken } from './store/loginReducer';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const token = useSelector((state) => state.login.token);
+  const dispatch = useDispatch();
+
   return (
     <div className="App">
       <header className="App-header">
