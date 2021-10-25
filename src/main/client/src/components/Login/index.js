@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Input, InputLabel, InputAdornment, FormControl, IconButton, Stack, Button } from '@mui/material';
 import { Visibility, VisibilityOff } from "@mui/icons-material"
-import { login, register } from "../../store/loginReducer";
+import { login as loginAction } from "../../store/loginReducer";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 
@@ -13,7 +13,7 @@ const LoginFormControl = (props) => {
 
 function Login() {
     const dispatch = useDispatch();
-    const history = useHistory();
+    const { push } = useHistory();
     const [passwordShowing, setPasswordShowing] = useState(false);
     const [registering, setRegistering] = useState(false);
     const [formValues, setFormValues] = useState({
@@ -25,18 +25,13 @@ function Login() {
         setPasswordShowing(!passwordShowing);
     }
 
-    const toggleRegsitering = () => {
+    const toggleRegistering = () => {
         setRegistering(!registering);
     }
 
     const submit = async () => {
-        const submitFn = registering ? register : login;
-        const argObj = {
-            username: formValues.username,
-            password: formValues.password,
-            history
-        };
-        dispatch(submitFn(argObj));
+        await dispatch(loginAction(formValues));
+        console.log('dispatched');
     }
 
     const onFormChange = (evt) => {
@@ -49,7 +44,7 @@ function Login() {
             <LoginFormControl>
                 <Button
                 id="login-register-switch"
-                onClick={toggleRegsitering}
+                onClick={toggleRegistering}
                 variant="contained"
                 color="secondary"
                 sx={{mt: "1rem"}}>

@@ -2,12 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-
-import store from './store';
+import { configureStore } from '@reduxjs/toolkit';
+import reducer from './store';
 import './index.css';
 import App from './App';
 import Login from './components/Login';
 import SecureRoute from './utils/SecureRoute';
+
+const store = configureStore({reducer});
 
 ReactDOM.render(
   <React.StrictMode>
