@@ -13,9 +13,9 @@ const LoginFormControl = (props) => {
 
 function Login() {
     const dispatch = useDispatch();
-    const {push} = useHistory();
+    const history = useHistory();
     const [passwordShowing, setPasswordShowing] = useState(false);
-    const [registering, setRegistering] = useState(true);
+    const [registering, setRegistering] = useState(false);
     const [formValues, setFormValues] = useState({
         username: '',
         password: ''
@@ -29,9 +29,14 @@ function Login() {
         setRegistering(!registering);
     }
 
-    const submit = () => {
+    const submit = async () => {
         const submitFn = registering ? register : login;
-        dispatch(submitFn(formValues, push));
+        const argObj = {
+            username: formValues.username,
+            password: formValues.password,
+            history
+        };
+        dispatch(submitFn(argObj));
     }
 
     const onFormChange = (evt) => {

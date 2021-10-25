@@ -7,6 +7,5 @@ export default configureStore({
     reducer: {
         login: loginReducer,
         jobs: jobReducer
-    },
-    middleware: [thunk]
+    }
 });
