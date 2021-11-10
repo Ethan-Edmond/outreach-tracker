@@ -46,4 +46,14 @@ public class UserController {
 
     return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
   }
+
+  // TODO finish login endpoint
+//   @PostMapping(value = "/login", consumes = {"application/json"}, produces = {"application/json"})
+//   public ResponseEntity<?> login (
+//     @Valid
+//     @RequestBody
+//     User loggingIn
+//   ) {
+//     return new ResponseEntity<>(null);
+//   }
 }
